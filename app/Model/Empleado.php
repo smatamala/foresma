@@ -1,7 +1,6 @@
 <?php
 class Empleado extends AppModel{
 	public $displayField='nombre';
-	
 
 	public $hasMany= array(
 			'Produccion'=> array(

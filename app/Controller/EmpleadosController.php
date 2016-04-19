@@ -4,6 +4,22 @@ class EmpleadosController extends AppController{
 		'limit'=> 10,
 		'order' => array('Empleado.id'=>'asc')
 		);
+
+	public function isAuthorized($user){
+		if($user['role']=='user'){
+			if(in_array($this->action,array('add','index','view'))){
+				return true;
+			}
+			else{
+				if($this->Auth->user('id')){
+					$this->Session->$this->Session->setFlash('No puede acceder', 'default', array('class'=>'alert alert-danger'));
+					$this->redirect($this->Auth->redirect());
+				}
+			}
+		}
+		return parent::isAuthorized($user);
+	}
+
 	public function index(){
 		$this->Empleado->recursive=0;
 		$this->set('empleados',$this->paginate());
@@ -22,9 +38,13 @@ class EmpleadosController extends AppController{
 				$this->redirect(array('action'=>'index'));
 			endif;
 		endif;
-		$this->loadModel('Faenas');
+		$this->loadModel('Faenas','Users');
 		$faenas=$this->Empleado->Faena->find('list');
-		$this->set(compact('faenas'));
+		$users=$this->Empleado->User->find('list');
+		$this->set(compact('faenas','users'));
+		
+		
+
 		/*debug($this->request->data);
 */
 

@@ -1,9 +1,12 @@
-<h1>Produccion</h1>
-<?php echo $this->Html->link('Agregar Produccion',array('action'=>'add'));?>
-<a href="/foresma/" role="button"> Volver al menu principal</a>
+<div class="col-md-20">
+	<h2>Produccion</h2>
+	<h3>
+		<ul>
+			<?php echo $this->Html->link(__('Agregar Produccion'), array('action' => 'add')); ?>
+		</ul> 
+	</h3>
 	<table>
 	<tr>
-			<th><?php echo $this->Paginator->sort('id')?></th>
 			<th><?php echo $this->Paginator->sort('Dia')?></th>	
 			<th><?php echo $this->Paginator->sort('Empleado')?></th>
 			<th><?php echo $this->Paginator->sort('Maquina')?></th>
@@ -22,7 +25,6 @@
 
 	<?php foreach ($produccions as $key => $produccion):?>
 		<tr>
-			<td><?php echo $produccion['Produccion']['id'];?></td>
 			<td><?php echo $produccion['Produccion']['dia'];?></td>
 			<td><?php echo $this->Html->link($produccion['Empleado']['nombre'],array('controller' =>'empleados',
 											'action'=> 'view',
@@ -46,18 +48,11 @@
 
 		</tr>
 	<?php endforeach;?>
-
-
-
-</table>
-<pre>
-	<?php print_R($produccions);?>
-</pre>
-
+	</table>
+</div>
 <div class="input select">
    <label for="ModelField">Field</label>
-   <input name="data[Model][field]" value="" id="ModelField"
-    type="hidden">
+   <input name="data[Model][field]" value="" id="ModelField" type="hidden">
    <div class="checkbox">
       <input name="data[Model][field][]" value="Value 1"
         id="ModelField1" type="checkbox">
@@ -68,4 +63,14 @@
         id="ModelField2" type="checkbox">
       <label for="ModelField2">Label 2</label>
    </div>
+   <div class="paging">
+		<?php echo $this->Paginator->prev('< anterior',array(),null,array('class'=>'prev disabled'));?>
+		<?php echo $this->Paginator->numbers(array('separator'=>''));?>
+		<?php echo $this->Paginator->next('siguiente >',array(),null,array('class'=>'next disabled'));?>
+
+		</div> 
 </div>
+
+<pre>
+	<?php print_R($produccions);?>
+</pre>

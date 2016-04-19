@@ -13,6 +13,20 @@ class ProduccionsController extends AppController{
 		//$this->set('administradores',$this->Admin->findBypass(admin));
 		//$this->set('administradores',$this->Admin->findByacceso(0));
 	}
+	public function isAuthorized($user){
+			if($user['role']=='user'){
+				if(in_array($this->action,array('add','index','view'))){
+					return true;
+				}
+				else{
+					if($this->Auth->user('id')){
+						$this->Session->$this->Session->setFlash('No puede acceder', 'default', array('class'=>'alert alert-danger'));
+						$this->redirect($this->Auth->redirect());
+					}
+				}
+			}
+			return parent::isAuthorized($user);
+		}
 public function add(){
 		if($this->request->is('post')):
 			if($this->Produccion->save($this->request->data)):

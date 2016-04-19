@@ -1,24 +1,19 @@
-<div class="index">
+<div class="col-md-12">
 	<h2>Faenas</h2>
-	<?php echo $this->Html->link('agregar faena',array('action'=>'add'));?>
-	<a href="/foresma/" role="button"> Volver al menu principal</a>
+	<h3><ul><?php echo $this->Html->link(__('Agregar Faenas'), array('action' => 'add')); ?>
+		</ul> 
+	</h3>
 	<table>
 		<tr>
-			<th><?php echo $this->Paginator->sort('id')?></th>
 			<th><?php echo $this->Paginator->sort('Nombre ')?></th>
 			<th><?php echo $this->Paginator->sort('Jefe')?></th>
-			<th><?php echo $this->Paginator->sort('Contraseña')?></th>
-			<th><?php echo $this->Paginator->sort('Permisos')?></th>
 			<th><?php echo $this->Paginator->sort('Creado')?></th>
 			<th><?php echo $this->Paginator->sort('Modificado')?></th>
 		</tr>
 		<?php foreach($faenas as $k=>$faena):?>
 			<tr>
-				<td><?php echo h($faena['Faena']['id']);?></td>
 				<td><?php echo h($faena['Faena']['nombre']);?></td>
 				<td><?php echo h($faena['Faena']['jefe']);?></td>
-				<td><?php echo h($faena['Faena']['pass']);?></td>
-				<td><?php echo h($faena['Faena']['role']);?></td>
 				<td><?php echo h($faena['Faena']['created']);?></td>
 				<td><?php echo h($faena['Faena']['modified']);?></td>
 			</tr>
